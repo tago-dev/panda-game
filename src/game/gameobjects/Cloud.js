@@ -23,8 +23,8 @@ export default class Cloud extends Phaser.GameObjects.Image {
         }
     }
 
-    updateWithSpeed(gameSpeed) {
-        this.moveWithSpeed(gameSpeed);
+    updateWithSpeed(gameSpeed, deltaMultiplier = 1) {
+        this.moveWithSpeed(gameSpeed, deltaMultiplier);
 
         if (this.x < -this.width) {
             this.recycleCloud();
@@ -42,7 +42,7 @@ export default class Cloud extends Phaser.GameObjects.Image {
         this.x -= this.speed * GAMEPLAY.BASE_GAME_SPEED;
     }
 
-    moveWithSpeed(gameSpeed) {
-        this.x -= this.speed * gameSpeed;
+    moveWithSpeed(gameSpeed, deltaMultiplier = 1) {
+        this.x -= this.speed * gameSpeed * deltaMultiplier;
     }
 }

@@ -1,7 +1,7 @@
 import { Scene } from "phaser";
 
 import { EventBus } from "./../EventBus";
-import { HEIGHTS, GAMEPLAY } from "./../constants";
+import { HEIGHTS, GAMEPLAY, getDeltaMultiplier } from "./../constants";
 
 import Player from "./../gameobjects/Player";
 import Cloud from "./../gameobjects/Cloud";
@@ -365,15 +365,17 @@ export class Game extends Scene {
     }
 
     update(time, delta) {
+        const deltaMultiplier = getDeltaMultiplier(delta);
+        
         // Se o player foi atingido, para tudo
         if (!this.playerHit) {
             this.clouds.forEach((cloud) =>
-                cloud.updateWithSpeed(this.getCurrentGameSpeed())
+                cloud.updateWithSpeed(this.getCurrentGameSpeed(), deltaMultiplier)
             );
 
             // Atualizar bugs e reciclar quando saem da tela
             this.bugs.forEach((bug) => {
-                bug.updateWithSpeed(this.getCurrentGameSpeed());
+                bug.updateWithSpeed(this.getCurrentGameSpeed(), deltaMultiplier);
                 if (bug.x < -50) {
                     this.recycleBug(bug);
                 }
@@ -381,7 +383,7 @@ export class Game extends Scene {
 
             // Atualizar patos e remover quando saem da tela
             this.ducks.forEach((duck, index) => {
-                duck.updateWithSpeed(this.getCurrentGameSpeed());
+                duck.updateWithSpeed(this.getCurrentGameSpeed(), deltaMultiplier);
                 if (duck.x < -50) {
                     duck.destroy();
                     this.ducks.splice(index, 1);
@@ -390,7 +392,7 @@ export class Game extends Scene {
 
             if (this.roadSprite) {
                 this.roadSprite.tilePositionX +=
-                    GAMEPLAY.BACKGROUND_SPEED * this.getCurrentGameSpeed(); // Aplica velocidade dinâmica
+                    GAMEPLAY.BACKGROUND_SPEED * this.getCurrentGameSpeed() * deltaMultiplier; // Aplica velocidade dinâmica normalizada
             }
 
             // Pontuação por passos (a cada 100ms = 1 ponto)
@@ -410,7 +412,7 @@ export class Game extends Scene {
         }
 
         if (this.player) {
-            this.player.update();
+            this.player.update(delta, deltaMultiplier);
             // Atualiza framerate da animação de corrida baseado na velocidade
             this.player.updateRunningSpeed(this.getCurrentGameSpeed());
         }

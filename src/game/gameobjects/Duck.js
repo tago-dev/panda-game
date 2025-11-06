@@ -22,16 +22,16 @@ export default class Duck extends Phaser.GameObjects.Image {
         this.move();
     }
 
-    updateWithSpeed(gameSpeed) {
-        this.moveWithSpeed(gameSpeed);
+    updateWithSpeed(gameSpeed, deltaMultiplier = 1) {
+        this.moveWithSpeed(gameSpeed, deltaMultiplier);
     }
 
     move() {
         this.x -= this.speed * GAMEPLAY.BASE_GAME_SPEED;
     }
 
-    moveWithSpeed(gameSpeed) {
-        this.x -= this.speed * gameSpeed;
+    moveWithSpeed(gameSpeed, deltaMultiplier = 1) {
+        this.x -= this.speed * gameSpeed * deltaMultiplier;
     }
 
     collect() {

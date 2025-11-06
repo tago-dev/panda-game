@@ -153,7 +153,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
         }
     }
 
-    update() {
+    update(delta, deltaMultiplier) {
         if (this.isHit) {
             // Após 1 segundo de hit, muda para animação de morto
             const hitElapsed = this.scene.time.now - this.hitTimer;

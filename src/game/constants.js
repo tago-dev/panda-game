@@ -10,7 +10,7 @@ export const HEIGHTS = {
 
 // Constantes de gameplay
 export const GAMEPLAY = {
-    BASE_GAME_SPEED: 0.7, // Velocidade base inicial (70% da velocidade)
+    BASE_GAME_SPEED: 1.5, // Velocidade base inicial (100% da velocidade)
     SPEED_INCREASE: 0.02, // Aumento de velocidade por milestone
     SPEED_MILESTONE: 100, // A cada quantos pontos aumenta a velocidade
     BUG_SPEED: 2, // Velocidade dos bugs
@@ -21,4 +21,9 @@ export const GAMEPLAY = {
     BUG_SPACING_MAX: 2000, // Espaçamento máximo entre bugs
     INITIAL_BUG_DISTANCE: 600, // Distância inicial dos bugs
     INITIAL_BUG_SPACING: 600, // Espaçamento inicial entre bugs - reduzido
+    TARGET_FPS: 60, // FPS alvo para normalização (60fps padrão)
+};
+
+export const getDeltaMultiplier = (delta) => {
+    return delta / (1000 / GAMEPLAY.TARGET_FPS);
 };

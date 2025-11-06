@@ -33,8 +33,8 @@ export default class Beetle extends Phaser.GameObjects.Image {
         this.move();
     }
 
-    updateWithSpeed(gameSpeed: number) {
-        this.moveWithSpeed(gameSpeed);
+    updateWithSpeed(gameSpeed: number, deltaMultiplier: number = 1) {
+        this.moveWithSpeed(gameSpeed, deltaMultiplier);
     }
 
     recycleBug() {
@@ -51,7 +51,7 @@ export default class Beetle extends Phaser.GameObjects.Image {
         this.x -= this.speed * GAMEPLAY.BASE_GAME_SPEED;
     }
 
-    moveWithSpeed(gameSpeed: number) {
-        this.x -= this.speed * gameSpeed;
+    moveWithSpeed(gameSpeed: number, deltaMultiplier: number = 1) {
+        this.x -= this.speed * gameSpeed * deltaMultiplier;
     }
 }

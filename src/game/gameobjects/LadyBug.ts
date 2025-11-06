@@ -35,8 +35,8 @@ export default class LadyBug extends Phaser.GameObjects.Image {
         // Remoção controlada pela cena Game
     }
 
-    updateWithSpeed(gameSpeed: number) {
-        this.moveWithSpeed(gameSpeed);
+    updateWithSpeed(gameSpeed: number, deltaMultiplier: number = 1) {
+        this.moveWithSpeed(gameSpeed, deltaMultiplier);
     }
 
     recycleBug() {
@@ -53,7 +53,7 @@ export default class LadyBug extends Phaser.GameObjects.Image {
         this.x -= this.speed * GAMEPLAY.BASE_GAME_SPEED; // Usa velocidade base
     }
 
-    moveWithSpeed(gameSpeed: number) {
-        this.x -= this.speed * gameSpeed;
+    moveWithSpeed(gameSpeed: number, deltaMultiplier: number = 1) {
+        this.x -= this.speed * gameSpeed * deltaMultiplier;
     }
 }

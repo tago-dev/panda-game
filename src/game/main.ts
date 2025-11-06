@@ -13,6 +13,10 @@ const config: Phaser.Types.Core.GameConfig = {
     height: 500,
     parent: "game-container",
     backgroundColor: "#000000",
+    fps: {
+        target: 60,
+        forceSetTimeOut: false,
+    },
     physics: {
         default: "arcade",
         arcade: {
